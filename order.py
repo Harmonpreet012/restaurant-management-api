@@ -12,10 +12,10 @@ class Order:
         self.customer_id    = int(customer_id)
         self.items          = []
         self.total_price    = 0
-        self.discount       = discount
+        self.discount       = int(discount)
         self.status         = "building"
         self.table          = -1
-        self.order_id       = order_id
+        self.order_id       = int(order_id)
         if order_id==-1:
             self.order_id = random.randint(100000, 999999)
     

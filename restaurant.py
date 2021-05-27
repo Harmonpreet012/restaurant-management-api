@@ -15,9 +15,9 @@ class Table:
 
 class MenuItem:
     def __init__(self, id, name, cost, quantity = "full", description ="", discount = 0 ):
-        self.id             = id
+        self.id             = int(id)
         self.name           = name
-        self.cost           = cost
+        self.cost           = int(cost)
         self.description    = description
         self.discount       = discount
         self.quantity       = quantity 
