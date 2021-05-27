@@ -1,10 +1,5 @@
 import random
 from flask import jsonify, Flask
-from flask_pymongo import PyMongo
-
-app = Flask(__name__)
-mongo = PyMongo(app = app, uri = "mongodb+srv://db0:0000@cluster0.ssb5h.mongodb.net/ToastApp?retryWrites=true&w=majority")
-
 
 class Order:
     def __init__(self, customer_id, restaurant_id, discount =0, order_id = -1 ):
