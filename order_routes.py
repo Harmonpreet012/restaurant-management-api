@@ -17,7 +17,13 @@ def order():
         if request.args.get("order_id"):
             try:
                 response = mongo.db.orders.find_one({"order_id": int(request.args.get("order_id"))})
-                order = Order(customer_id=response["customer_id"], restaurant_id=response["restaurant_id"], discount = response["discount"])
+                order = Order(
+                        order_id        = response["order_id"],
+                        customer_id     = response["customer_id"],
+                        restaurant_id   = response["restaurant_id"],
+                        discount        = response["discount"],
+                        table           = response["table"],
+                        status          = response["status"] )
                 return jsonify({"status":"ok", "data":order.get_dict()})
             except:
                 return jsonify({"status":"error"})
@@ -36,9 +42,17 @@ def order():
             try:
                 response = mongo.db.orders.find({"status": request.args.get("status")})
                 orders = []
+
                 for order in response:
-                    order = Order(customer_id=order["customer_id"], restaurant_id=order["restaurant_id"], discount = order["discount"])
-                    orders.append(order.get_dict())
+                    obj = Order(
+                        order_id = order["order_id"],
+                        customer_id=order["customer_id"],
+                        restaurant_id=order["restaurant_id"],
+                        discount = order["discount"],
+                        table    = order["table"],
+                        status   = order["status"] )
+
+                    orders.append(obj.get_dict())
                 return jsonify({"status":"ok", "data":orders})
             except:
                 return jsonify({"status": "error"})

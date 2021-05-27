@@ -2,14 +2,14 @@ import random
 from flask import jsonify, Flask
 
 class Order:
-    def __init__(self, customer_id, restaurant_id, discount =0, order_id = -1 ):
+    def __init__(self, customer_id, restaurant_id, discount =0, order_id = -1, status="building", table=-1 ):
         self.restaurant_id  = int(restaurant_id)
         self.customer_id    = int(customer_id)
         self.items          = []
         self.total_price    = 0
         self.discount       = int(discount)
-        self.status         = "building"
-        self.table          = -1
+        self.status         = status
+        self.table          = table
         self.order_id       = int(order_id)
         if order_id==-1:
             self.order_id = random.randint(100000, 999999)
