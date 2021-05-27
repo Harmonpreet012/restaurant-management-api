@@ -1,0 +1,50 @@
+<html>
+    <body>
+    <h1>ToastApp API docs</h1>
+    
+    <h3>Order</h3>
+    /order/<br>
+    <b>methods allowed:</b> ['GET', 'POST']<br>
+    <b>description:</b> endpoint to get deatils of order or create a new order.<br>
+    get arguements: order_id(optional), restaurant_id(optional), order_status["placed","running", "complete"](optional)<br>
+    post arguements:  customer_id, restaurant_id, discount_percent<br>
+    <br>
+    
+    /order/item<br>
+    <b>methods allowed:</b> ['POST']<br>
+    <b>description:</b> endpoint to add or delete new items to order.<br>
+    post arguements: order_id, item_id<br>
+    <br>
+
+    /order/assign<br>
+    <b>methods allowed:</b> ['POST']<br>
+    <b>description:</b> endpoint to add or modify a new item in order.<br>
+    post arguements: order_id, table_id
+        
+    <h3>Restaurant</h3>
+    /restaurant<br>
+    <b>methods allowed:</b> ['GET', 'POST']<br>
+    <b>description:</b> endpoint to view all restaurants or add a new restaurant.<br>
+    get arguements: none<br>
+    post arguements: name, address, owner_name, contact_number
+    <br><br>
+
+    /restaurant/table<br>
+    <b>methods allowed:</b> ['POST', 'GET', 'DELETE']<br>
+    <b>description:</b> endpoint to get, delete or add table to restaurant.<br>
+    get arguements: restaurant_id<br>
+    post arguements:  restaurant_id, table_capacity<br>
+    delete arguements: restaurant_id, table_capacity
+    <br><br>
+    
+    /restaurant/menu<br>
+    <b>methods allowed:</b> ['POST', 'GET', 'DELETE']<br>
+    <b>description:</b> endpoint to get restaurant menu or add new item to menu.<br>
+    get arguements: restaurant_id<br>
+    post arguements:  restaurant_id, dish_name, cost, quantity("half", "full"), description, discount_percent.<br>
+    delete arguements: restaurant_id, dish_id
+    <br>
+
+    
+    </body>
+</html>
