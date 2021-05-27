@@ -8,7 +8,11 @@ mongo = PyMongo(app = app, uri = "mongodb+srv://db0:0000@cluster0.ssb5h.mongodb.
 
 def restaurant():
     if request.method == "GET":
-        response = mongo.db.restaurants.find()
+        if request.args.get("restaurant_id"):
+            response = mongo.db.restaurants.find({"restaurant_id": int(request.args.get("restaurant_id")) })
+        else:    
+            response = mongo.db.restaurants.find()
+
         res_dict = []
         for res in response:
             obj = Restaurant(
@@ -22,6 +26,7 @@ def restaurant():
         return jsonify(res_dict)
     
     if request.method == "POST":
+
         restaurant = Restaurant(
             name            = request.form["name"],
             address         = request.form["address"],
@@ -67,7 +72,7 @@ def menu():
 
         
         for item in prev_menu:
-            if item.id == int(request.form["dish_id"]):
+            if item["id"] == int(request.form["id"]):
                 prev_menu.remove(item)
                 break
         filter = {"restaurant_id": int(restaurant_id)}
@@ -105,18 +110,18 @@ def table():
     if request.method == "DELETE":
         restaurant_id = int(request.form["restaurant_id"])
         response = mongo.db.restaurants.find_one({"restaurant_id": restaurant_id})
-        prev_menu = response["tables"]
+        tables = response["tables"]
 
         
-        for item in prev_menu:
-            if item.capacity == int(request.form["table_capacity"]):
-                prev_menu.remove(item)
+        for table in tables:
+            if table["table_id"] == int(request.form["table_id"]):
+                tables.remove(table)
                 break
         filter = {"restaurant_id": int(restaurant_id)}
 
         mongo.db.restaurants.update_one(filter = filter, update= { 
             "$set": {
-                "tables":prev_menu
+                "tables":tables
                 }
-            })
+        })
         return jsonify({"status":"ok"})

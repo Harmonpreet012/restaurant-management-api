@@ -5,23 +5,21 @@ from flask_pymongo import PyMongo
 app = Flask(__name__)
 mongo = PyMongo(app = app, uri = "mongodb+srv://db0:0000@cluster0.ssb5h.mongodb.net/ToastApp?retryWrites=true&w=majority")
 
-class NewItem:
-    def __init__(self, item_id, quantity):
-        self.item_id  =  item_id
-        self.quantity = quantity
 
 class Order:
-    def __init__(self, customer_id, restaurant_id, discount =0 ):
-        self.restaurant_id  = restaurant_id
-        self.customer_id    = customer_id
+    def __init__(self, customer_id, restaurant_id, discount =0, order_id = -1 ):
+        self.restaurant_id  = int(restaurant_id)
+        self.customer_id    = int(customer_id)
         self.items          = []
         self.total_price    = 0
         self.discount       = discount
-        self.status         = "placed"
+        self.status         = "building"
         self.table          = -1
-        self.order_id = random.randint(100000, 999999)
+        self.order_id       = order_id
+        if order_id==-1:
+            self.order_id = random.randint(100000, 999999)
     
-    def get_json(self):
+    def get_dict(self):
         text = {
             "order_id":      self.order_id,
             "restaurant_id": self.restaurant_id,

@@ -12,8 +12,9 @@ def home():
 
 #Routes for orders
 app.add_url_rule('/order', view_func = order_routes.order, methods = ['GET', 'POST'])
-app.add_url_rule('/order/assign', view_func = order_routes.assign, methods = ['POST'])
-app.add_url_rule('/order/item', view_func = order_routes.item, methods = ['POST'])
+app.add_url_rule('/order/assign', view_func = order_routes.assign_order, methods = ['POST'])
+app.add_url_rule('/order/item', view_func = order_routes.item, methods = ['GET', 'POST'])
+app.add_url_rule('/order/place', view_func = order_routes.place_order, methods = ['POST'])
 
 #routes for restaurants
 app.add_url_rule('/restaurant', view_func = restaurant_routes.restaurant, methods = ['GET', 'POST'])

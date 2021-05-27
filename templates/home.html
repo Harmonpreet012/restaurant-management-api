@@ -6,13 +6,14 @@
     /order/<br>
     <b>methods allowed:</b> ['GET', 'POST']<br>
     <b>description:</b> endpoint to get deatils of order or create a new order.<br>
-    get arguements: order_id(optional), restaurant_id(optional), order_status["placed","running", "complete"](optional)<br>
+    get arguements: order_id(optional), restaurant_id(optional), order_status["building", "placed","running", "complete"](optional)<br>
     post arguements:  customer_id, restaurant_id, discount_percent<br>
     <br>
     
     /order/item<br>
-    <b>methods allowed:</b> ['POST']<br>
-    <b>description:</b> endpoint to add or delete new items to order.<br>
+    <b>methods allowed:</b> ['GET', 'POST']<br>
+    <b>description:</b> endpoint to view or add new items to order.<br>
+    get_arugements: order_id<br>
     post arguements: order_id, item_id<br>
     <br>
 
@@ -20,12 +21,17 @@
     <b>methods allowed:</b> ['POST']<br>
     <b>description:</b> endpoint to add or modify a new item in order.<br>
     post arguements: order_id, table_id
+
+    /order/place<br>
+    <b>methods allowed:</b> ['POST']<br>
+    <b>description:</b> endpoint to place a order.<br>
+    post arguements: order_id.<br>
         
     <h3>Restaurant</h3>
     /restaurant<br>
     <b>methods allowed:</b> ['GET', 'POST']<br>
     <b>description:</b> endpoint to view all restaurants or add a new restaurant.<br>
-    get arguements: none<br>
+    get arguements: restaurant_id(optional)<br>
     post arguements: name, address, owner_name, contact_number
     <br><br>
 
@@ -34,7 +40,7 @@
     <b>description:</b> endpoint to get, delete or add table to restaurant.<br>
     get arguements: restaurant_id<br>
     post arguements:  restaurant_id, table_capacity<br>
-    delete arguements: restaurant_id, table_capacity
+    delete arguements: restaurant_id, table_id
     <br><br>
     
     /restaurant/menu<br>
